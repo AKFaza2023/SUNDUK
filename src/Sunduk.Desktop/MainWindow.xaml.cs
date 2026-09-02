@@ -32,6 +32,31 @@ public partial class MainWindow : Window
         RefreshAll();
     }
 
+    private void TitleBar_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+    {
+        if (e.ClickCount == 2)
+        {
+            ToggleMaximize();
+            return;
+        }
+
+        if (e.LeftButton == MouseButtonState.Pressed)
+        {
+            DragMove();
+        }
+    }
+
+    private void Minimize_Click(object sender, RoutedEventArgs e) => WindowState = WindowState.Minimized;
+
+    private void Maximize_Click(object sender, RoutedEventArgs e) => ToggleMaximize();
+
+    private void ToggleMaximize()
+    {
+        WindowState = WindowState == WindowState.Maximized ? WindowState.Normal : WindowState.Maximized;
+    }
+
+    private void Close_Click(object sender, RoutedEventArgs e) => Close();
+
     private void NavButton_Click(object sender, RoutedEventArgs e)
     {
         if (sender is Button button && button.Tag is string page)
@@ -49,7 +74,7 @@ public partial class MainWindow : Window
 
         if (page == "Главная")
         {
-            PageSubtitle.Text = "Ваше рабочее пространство и быстрый доступ к важному";
+            PageSubtitle.Text = "Обзор ваших данных и быстрый доступ к важному";
             DashboardView.Visibility = Visibility.Visible;
             RefreshAll();
             return;
@@ -57,7 +82,7 @@ public partial class MainWindow : Window
 
         if (page == "Каталог")
         {
-            PageSubtitle.Text = "Карточки, категории, фильтры и быстрый поиск";
+            PageSubtitle.Text = "Карточки, категории и быстрый поиск";
             CatalogView.Visibility = Visibility.Visible;
             RefreshCatalog();
             return;
@@ -65,23 +90,21 @@ public partial class MainWindow : Window
 
         PageSubtitle.Text = "Модуль SUNDUK";
         PlaceholderTitle.Text = page;
-
         PlaceholderText.Text = page switch
         {
-            "Объявления" => "Единое рабочее место для объявлений и внешних источников. Модуль подключён к утверждённой оболочке SUNDUK.",
-            "Закладки" => "Сохранённые ссылки и быстрый доступ к важным интернет-ресурсам.",
-            "Контакты" => "Контакты, организации и связанные записи в единой локальной базе.",
-            "Заметки" => "Личные и рабочие заметки с привязкой к другим данным SUNDUK.",
-            "Ежедневник" => "Ежедневник и календарное представление рабочих событий.",
-            "Задачи" => "Задачи, статусы и контроль выполнения в едином рабочем пространстве.",
-            "Напоминания" => "Локальные напоминания и уведомления SUNDUK.",
-            "Файлы" => "Локальные файлы и вложения карточек с дальнейшим развитием синхронизации.",
-            "Избранное" => "Избранные карточки, записи и быстрые ссылки.",
-            "Настройки" => $"Активная тема: {_currentTheme}. Настройки применяются без перезапуска приложения.",
-            "Поддержка" => "SUNDUK — разработка СтавДок. Сайт разработчика доступен по ссылке «ставдок.рф» в нижней части боковой панели.",
-            _ => $"Раздел «{page}» подключён к общей навигации SUNDUK."
+            "Объявления" => "Объявления, публикации и внешние источники.",
+            "Закладки" => "Сохранённые ссылки и быстрый доступ.",
+            "Контакты" => "Контакты, организации и связанные записи.",
+            "Заметки" => "Личные и рабочие заметки.",
+            "Ежедневник" => "Календарь и события.",
+            "Задачи" => "Задачи, статусы и контроль выполнения.",
+            "Напоминания" => "Напоминания и локальные уведомления.",
+            "Файлы" => "Файлы и вложения карточек.",
+            "Избранное" => "Избранные записи SUNDUK.",
+            "Настройки" => $"Активная тема: {_currentTheme}.",
+            "Поддержка" => "SUNDUK — разработка СтавДок. ставдок.рф",
+            _ => $"Раздел «{page}» подключён к SUNDUK."
         };
-
         PlaceholderView.Visibility = Visibility.Visible;
     }
 
@@ -143,10 +166,7 @@ public partial class MainWindow : Window
         }
     }
 
-    private void SearchBox_TextChanged(object sender, TextChangedEventArgs e)
-    {
-        RefreshCatalog();
-    }
+    private void SearchBox_TextChanged(object sender, TextChangedEventArgs e) => RefreshCatalog();
 
     private void RefreshAll()
     {
@@ -154,9 +174,7 @@ public partial class MainWindow : Window
         {
             ProductsCountText.Text = DatabaseService.CountByKind("Товар").ToString();
             ContactsCountText.Text = DatabaseService.CountByKind("Контакт").ToString();
-            NotesCountText.Text = DatabaseService.CountByKind("Заметка").ToString();
-            BookmarksCountText.Text = DatabaseService.CountByKind("Закладка").ToString();
-            LatestList.ItemsSource = DatabaseService.GetItems(limit: 8);
+            LatestList.ItemsSource = DatabaseService.GetItems(limit: 5);
         }
         catch
         {
@@ -167,8 +185,7 @@ public partial class MainWindow : Window
     {
         try
         {
-            var search = SearchBox?.Text;
-            CatalogList.ItemsSource = DatabaseService.GetItems(search);
+            CatalogList.ItemsSource = DatabaseService.GetItems(SearchBox?.Text);
         }
         catch
         {
@@ -182,61 +199,18 @@ public partial class MainWindow : Window
     private void ApplyTheme(string theme)
     {
         _currentTheme = theme;
+        var effectiveTheme = theme == "System" ? (IsWindowsLightTheme() ? "Light" : "Dark") : theme;
 
-        var effectiveTheme = theme;
-        if (theme == "System")
-        {
-            effectiveTheme = IsWindowsLightTheme() ? "Light" : "Dark";
-        }
-
+        // The approved main reference keeps the dark navy shell in the default theme.
         if (effectiveTheme == "Light")
         {
             SetBrush("ShellBrush", "#F3F6F8");
-            SetBrush("ShellDeepBrush", "#E8EEF2");
-            SetBrush("ShellHoverBrush", "#E1E9EE");
             SetBrush("ShellTextBrush", "#173042");
-            SetBrush("ShellMutedBrush", "#6D7D89");
-            SetBrush("WorkspaceBrush", "#F7F9FB");
-            SetBrush("CardBrush", "#FFFFFF");
-            SetBrush("InputBrush", "#F8FAFC");
-            SetBrush("TextBrush", "#17212B");
-            SetBrush("MutedBrush", "#697887");
-            SetBrush("BorderBrush", "#E1E7ED");
-            SetBrush("AccentBrush", "#1FA35B");
-            SetBrush("AccentHoverBrush", "#188A4D");
-            SetBrush("AccentSoftBrush", "#EAF7F0");
-            SetBrush("AccentTextBrush", "#167A45");
         }
         else
         {
-            // Approved default: dark-blue shell, white/light workspace and green accents.
-            SetBrush("ShellBrush", "#11283A");
-            SetBrush("ShellDeepBrush", "#0D2030");
-            SetBrush("ShellHoverBrush", "#1A354A");
+            SetBrush("ShellBrush", "#00162E");
             SetBrush("ShellTextBrush", "#F7FBFF");
-            SetBrush("ShellMutedBrush", "#A8B9C6");
-            SetBrush("WorkspaceBrush", "#F5F7FA");
-            SetBrush("CardBrush", "#FFFFFF");
-            SetBrush("InputBrush", "#F8FAFC");
-            SetBrush("TextBrush", "#17212B");
-            SetBrush("MutedBrush", "#697887");
-            SetBrush("BorderBrush", "#E1E7ED");
-            SetBrush("AccentBrush", "#1FA35B");
-            SetBrush("AccentHoverBrush", "#188A4D");
-            SetBrush("AccentSoftBrush", "#EAF7F0");
-            SetBrush("AccentTextBrush", "#167A45");
-        }
-
-        StatusText.Text = theme switch
-        {
-            "Dark" => "Тема: Тёмная — утверждённая оболочка SUNDUK",
-            "Light" => "Тема: Светлая",
-            _ => $"Тема: Как в системе ({effectiveTheme})"
-        };
-
-        if (PageTitle.Text == "Настройки")
-        {
-            ShowPage("Настройки");
         }
     }
 
