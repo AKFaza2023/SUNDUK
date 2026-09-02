@@ -5,232 +5,343 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
         Title="SUNDUK 0.3"
-        Width="1320"
-        Height="820"
-        MinWidth="1050"
-        MinHeight="680"
+        Width="1440"
+        Height="900"
+        MinWidth="1120"
+        MinHeight="720"
         WindowStartupLocation="CenterScreen"
-        Background="{DynamicResource BgBrush}"
+        Background="{DynamicResource WorkspaceBrush}"
         Foreground="{DynamicResource TextBrush}"
         TextOptions.TextFormattingMode="Display"
         TextOptions.TextRenderingMode="ClearType"
         UseLayoutRounding="True"
         SnapsToDevicePixels="True">
 
-    <Grid Background="{DynamicResource BgBrush}">
+    <Grid Background="{DynamicResource WorkspaceBrush}">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="236"/>
+            <ColumnDefinition Width="252"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
-        <Border Grid.Column="0"
-                Background="{DynamicResource PanelBrush}"
-                BorderBrush="{DynamicResource BorderBrush}"
-                BorderThickness="0,0,1,0">
+        <!-- Permanent dark-blue SUNDUK shell -->
+        <Border Grid.Column="0" Background="{DynamicResource ShellBrush}">
             <Grid>
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="94"/>
+                    <RowDefinition Height="104"/>
                     <RowDefinition Height="*"/>
-                    <RowDefinition Height="86"/>
+                    <RowDefinition Height="116"/>
                 </Grid.RowDefinitions>
 
-                <StackPanel Margin="20,20,16,10">
-                    <TextBlock Text="SUNDUK"
-                               FontSize="28"
-                               FontWeight="Bold"
-                               Foreground="{DynamicResource TextBrush}"/>
-                    <TextBlock Text="Всё важное — в одном месте"
-                               FontSize="12"
-                               Margin="0,4,0,0"
-                               Foreground="{DynamicResource MutedBrush}"/>
-                </StackPanel>
+                <Grid Margin="18,18,14,12">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="50"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Border Width="42" Height="42" CornerRadius="11" Background="{DynamicResource AccentBrush}" VerticalAlignment="Top">
+                        <TextBlock Text="S" Foreground="White" FontSize="23" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </Border>
+                    <StackPanel Grid.Column="1" Margin="8,1,0,0">
+                        <TextBlock Text="SUNDUK" Foreground="{DynamicResource ShellTextBrush}" FontSize="24" FontWeight="Bold"/>
+                        <TextBlock Text="Всё важное — в одном месте" Foreground="{DynamicResource ShellMutedBrush}" FontSize="10.5" Margin="0,3,0,0"/>
+                    </StackPanel>
+                </Grid>
 
-                <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto">
-                    <StackPanel Margin="0,4,0,10">
-                        <Button Style="{StaticResource NavButtonStyle}" Tag="Главная" Click="NavButton_Click">⌂  Главная</Button>
-                        <Button Style="{StaticResource NavButtonStyle}" Tag="Каталог" Click="NavButton_Click">▦  Каталог</Button>
-                        <Button Style="{StaticResource NavButtonStyle}" Tag="Объявления" Click="NavButton_Click">◫  Объявления</Button>
-                        <Button Style="{StaticResource NavButtonStyle}" Tag="Закладки" Click="NavButton_Click">★  Закладки</Button>
-                        <Button Style="{StaticResource NavButtonStyle}" Tag="Контакты" Click="NavButton_Click">●  Контакты</Button>
-                        <Button Style="{StaticResource NavButtonStyle}" Tag="Заметки" Click="NavButton_Click">✎  Заметки</Button>
-                        <Button Style="{StaticResource NavButtonStyle}" Tag="Ежедневник" Click="NavButton_Click">▣  Ежедневник</Button>
-                        <Button Style="{StaticResource NavButtonStyle}" Tag="Задачи" Click="NavButton_Click">✓  Задачи</Button>
-                        <Button Style="{StaticResource NavButtonStyle}" Tag="Напоминания" Click="NavButton_Click">◷  Напоминания</Button>
-                        <Button Style="{StaticResource NavButtonStyle}" Tag="Файлы" Click="NavButton_Click">▤  Файлы</Button>
-                        <Button Style="{StaticResource NavButtonStyle}" Tag="Избранное" Click="NavButton_Click">♥  Избранное</Button>
-                        <Separator Margin="16,8" Background="{DynamicResource BorderBrush}"/>
-                        <Button Style="{StaticResource NavButtonStyle}" Tag="Настройки" Click="NavButton_Click">⚙  Настройки</Button>
-                        <Button Style="{StaticResource NavButtonStyle}" Tag="Поддержка" Click="NavButton_Click">?  Поддержка</Button>
+                <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
+                    <StackPanel Margin="0,2,0,12">
+                        <TextBlock Text="РАБОЧЕЕ ПРОСТРАНСТВО" Foreground="{DynamicResource ShellMutedBrush}" FontSize="9.5" FontWeight="SemiBold" Margin="24,5,0,7"/>
+                        <Button Style="{StaticResource NavButtonStyle}" Tag="Главная" Click="NavButton_Click">⌂    Главная</Button>
+                        <Button Style="{StaticResource NavButtonStyle}" Tag="Каталог" Click="NavButton_Click">▦    Каталог</Button>
+                        <Button Style="{StaticResource NavButtonStyle}" Tag="Объявления" Click="NavButton_Click">▤    Объявления</Button>
+                        <Button Style="{StaticResource NavButtonStyle}" Tag="Закладки" Click="NavButton_Click">★    Закладки</Button>
+                        <Button Style="{StaticResource NavButtonStyle}" Tag="Контакты" Click="NavButton_Click">●    Контакты</Button>
+                        <Button Style="{StaticResource NavButtonStyle}" Tag="Заметки" Click="NavButton_Click">✎    Заметки</Button>
+
+                        <TextBlock Text="ПЛАНИРОВАНИЕ" Foreground="{DynamicResource ShellMutedBrush}" FontSize="9.5" FontWeight="SemiBold" Margin="24,17,0,7"/>
+                        <Button Style="{StaticResource NavButtonStyle}" Tag="Ежедневник" Click="NavButton_Click">▣    Ежедневник</Button>
+                        <Button Style="{StaticResource NavButtonStyle}" Tag="Задачи" Click="NavButton_Click">✓    Задачи</Button>
+                        <Button Style="{StaticResource NavButtonStyle}" Tag="Напоминания" Click="NavButton_Click">◷    Напоминания</Button>
+
+                        <TextBlock Text="ДАННЫЕ" Foreground="{DynamicResource ShellMutedBrush}" FontSize="9.5" FontWeight="SemiBold" Margin="24,17,0,7"/>
+                        <Button Style="{StaticResource NavButtonStyle}" Tag="Файлы" Click="NavButton_Click">▥    Файлы</Button>
+                        <Button Style="{StaticResource NavButtonStyle}" Tag="Избранное" Click="NavButton_Click">♥    Избранное</Button>
+
+                        <TextBlock Text="СИСТЕМА" Foreground="{DynamicResource ShellMutedBrush}" FontSize="9.5" FontWeight="SemiBold" Margin="24,17,0,7"/>
+                        <Button Style="{StaticResource NavButtonStyle}" Tag="Настройки" Click="NavButton_Click">⚙    Настройки</Button>
+                        <Button Style="{StaticResource NavButtonStyle}" Tag="Поддержка" Click="NavButton_Click">?    Поддержка</Button>
                     </StackPanel>
                 </ScrollViewer>
 
-                <StackPanel Grid.Row="2" Margin="20,8,16,16">
-                    <TextBlock Text="Разработка СтавДок"
-                               FontSize="12"
-                               Foreground="{DynamicResource MutedBrush}"/>
-                    <TextBlock Margin="0,4,0,0">
-                        <Hyperlink NavigateUri="https://xn--80aegytoh.xn--p1ai"
-                                   RequestNavigate="DeveloperSite_RequestNavigate">
-                            ставдок.рф
-                        </Hyperlink>
-                    </TextBlock>
-                    <TextBlock Text="Версия 0.3.0"
-                               FontSize="11"
-                               Margin="0,6,0,0"
-                               Foreground="{DynamicResource MutedBrush}"/>
-                </StackPanel>
+                <Border Grid.Row="2" Margin="14,8,14,14" Background="{DynamicResource ShellDeepBrush}" CornerRadius="10" Padding="14,12">
+                    <StackPanel>
+                        <TextBlock Text="Разработка СтавДок" Foreground="{DynamicResource ShellMutedBrush}" FontSize="11"/>
+                        <TextBlock Margin="0,4,0,0" FontSize="13" FontWeight="SemiBold">
+                            <Hyperlink Foreground="#69D89A" NavigateUri="https://xn--80aegytoh.xn--p1ai" RequestNavigate="DeveloperSite_RequestNavigate">ставдок.рф</Hyperlink>
+                        </TextBlock>
+                        <TextBlock Text="SUNDUK 0.3.0 • локальная версия" Foreground="{DynamicResource ShellMutedBrush}" FontSize="9.5" Margin="0,7,0,0"/>
+                    </StackPanel>
+                </Border>
             </Grid>
         </Border>
 
-        <Grid Grid.Column="1">
+        <!-- Approved light workspace -->
+        <Grid Grid.Column="1" Background="{DynamicResource WorkspaceBrush}">
             <Grid.RowDefinitions>
-                <RowDefinition Height="66"/>
+                <RowDefinition Height="72"/>
                 <RowDefinition Height="*"/>
-                <RowDefinition Height="32"/>
+                <RowDefinition Height="30"/>
             </Grid.RowDefinitions>
 
-            <Border Grid.Row="0"
-                    Background="{DynamicResource PanelBrush}"
-                    BorderBrush="{DynamicResource BorderBrush}"
-                    BorderThickness="0,0,0,1">
-                <Grid Margin="24,0">
+            <!-- Top search and Create -->
+            <Border Grid.Row="0" Background="{DynamicResource CardBrush}" BorderBrush="{DynamicResource BorderBrush}" BorderThickness="0,0,0,1">
+                <Grid Margin="28,0,26,0">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="Auto"/>
                     </Grid.ColumnDefinitions>
 
-                    <StackPanel VerticalAlignment="Center">
-                        <TextBlock x:Name="PageTitle"
-                                   Text="Главная"
-                                   FontSize="22"
-                                   FontWeight="SemiBold"/>
-                        <TextBlock x:Name="PageSubtitle"
-                                   Text="Рабочее пространство SUNDUK"
-                                   FontSize="12"
-                                   Foreground="{DynamicResource MutedBrush}"/>
-                    </StackPanel>
+                    <Grid Width="500" HorizontalAlignment="Left" VerticalAlignment="Center">
+                        <TextBox x:Name="TopSearchBox"
+                                 Style="{StaticResource SearchBoxStyle}"
+                                 Padding="38,8,14,8"
+                                 ToolTip="Поиск по SUNDUK. Нажмите Enter для поиска в каталоге"
+                                 KeyDown="TopSearchBox_KeyDown"/>
+                        <TextBlock Text="⌕" FontSize="19" Foreground="{DynamicResource MutedBrush}" Margin="13,0,0,1" VerticalAlignment="Center" IsHitTestVisible="False"/>
+                        <TextBlock Text="Поиск по SUNDUK..." FontSize="12.5" Foreground="#9AA5AF" Margin="39,0,0,0" VerticalAlignment="Center" IsHitTestVisible="False">
+                            <TextBlock.Style>
+                                <Style TargetType="TextBlock">
+                                    <Setter Property="Visibility" Value="Collapsed"/>
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding Text, ElementName=TopSearchBox}" Value="">
+                                            <Setter Property="Visibility" Value="Visible"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </TextBlock.Style>
+                        </TextBlock>
+                    </Grid>
 
-                    <StackPanel Grid.Column="1"
-                                Orientation="Horizontal"
-                                VerticalAlignment="Center">
-                        <Button Style="{StaticResource IconButtonStyle}"
-                                ToolTip="Тёмная"
-                                Click="DarkTheme_Click">☾</Button>
-                        <Button Style="{StaticResource IconButtonStyle}"
-                                ToolTip="Светлая"
-                                Click="LightTheme_Click">☀</Button>
-                        <Button Style="{StaticResource IconButtonStyle}"
-                                ToolTip="Как в системе"
-                                Click="SystemTheme_Click">▣</Button>
+                    <StackPanel Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center">
+                        <Button Style="{StaticResource AccentButtonStyle}" MinWidth="116" Margin="0,0,10,0" Click="AddCard_Click">＋  Создать</Button>
+                        <Button Style="{StaticResource IconButtonStyle}" ToolTip="Тёмная" Click="DarkTheme_Click">☾</Button>
+                        <Button Style="{StaticResource IconButtonStyle}" ToolTip="Светлая" Click="LightTheme_Click">☀</Button>
+                        <Button Style="{StaticResource IconButtonStyle}" ToolTip="Как в системе" Click="SystemTheme_Click">▣</Button>
                     </StackPanel>
                 </Grid>
             </Border>
 
-            <Grid Grid.Row="1" Margin="24">
-
-                <ScrollViewer x:Name="DashboardView"
-                              VerticalScrollBarVisibility="Auto">
+            <Grid Grid.Row="1" Margin="28,24,28,20">
+                <!-- Dashboard -->
+                <ScrollViewer x:Name="DashboardView" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
                     <StackPanel>
-                        <Border Background="{DynamicResource PanelBrush}"
-                                BorderBrush="{DynamicResource BorderBrush}"
-                                BorderThickness="1"
-                                CornerRadius="14"
-                                Padding="24"
-                                Margin="0,0,0,18">
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="*"/>
-                                    <ColumnDefinition Width="Auto"/>
-                                </Grid.ColumnDefinitions>
-                                <StackPanel>
-                                    <TextBlock Text="Добро пожаловать в SUNDUK"
-                                               FontSize="28"
-                                               FontWeight="Bold"/>
-                                    <TextBlock Text="Каталог, контакты, заметки и важные данные хранятся локально на вашем компьютере."
-                                               Margin="0,8,0,0"
-                                               FontSize="14"
-                                               Foreground="{DynamicResource MutedBrush}"/>
+                        <Grid Margin="0,0,0,20">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <StackPanel>
+                                <TextBlock x:Name="PageTitle" Text="Главная" FontSize="27" FontWeight="Bold" Foreground="{DynamicResource TextBrush}"/>
+                                <TextBlock x:Name="PageSubtitle" Text="Ваше рабочее пространство и быстрый доступ к важному" FontSize="12.5" Foreground="{DynamicResource MutedBrush}" Margin="0,5,0,0"/>
+                            </StackPanel>
+                            <Border Grid.Column="1" Background="{DynamicResource AccentSoftBrush}" CornerRadius="18" Padding="12,7" VerticalAlignment="Center">
+                                <StackPanel Orientation="Horizontal">
+                                    <Ellipse Width="7" Height="7" Fill="{DynamicResource AccentBrush}" VerticalAlignment="Center"/>
+                                    <TextBlock Text="Локальная база активна" Foreground="{DynamicResource AccentTextBrush}" FontSize="11" FontWeight="SemiBold" Margin="7,0,0,0"/>
                                 </StackPanel>
-                                <Button Grid.Column="1"
-                                        Style="{StaticResource AccentButtonStyle}"
-                                        Margin="20,2,0,2"
-                                        Click="AddCard_Click">+ Новая карточка</Button>
-                            </Grid>
-                        </Border>
+                            </Border>
+                        </Grid>
 
                         <Grid Margin="0,0,0,18">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="12"/>
+                                <ColumnDefinition Width="14"/>
                                 <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="12"/>
+                                <ColumnDefinition Width="14"/>
                                 <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="12"/>
+                                <ColumnDefinition Width="14"/>
                                 <ColumnDefinition Width="*"/>
                             </Grid.ColumnDefinitions>
 
-                            <Border Grid.Column="0" Background="{DynamicResource PanelBrush}" BorderBrush="{DynamicResource BorderBrush}" BorderThickness="1" CornerRadius="12" Padding="18">
-                                <StackPanel><TextBlock Text="Товары" Foreground="{DynamicResource MutedBrush}"/><TextBlock x:Name="ProductsCountText" Text="0" FontSize="30" FontWeight="Bold" Margin="0,6,0,0"/></StackPanel>
+                            <Border Grid.Column="0" Style="{StaticResource CardStyle}" Padding="18">
+                                <Grid><Grid.ColumnDefinitions><ColumnDefinition Width="*"/><ColumnDefinition Width="42"/></Grid.ColumnDefinitions>
+                                    <StackPanel><TextBlock Text="Товары" Foreground="{DynamicResource MutedBrush}" FontSize="11.5"/><TextBlock x:Name="ProductsCountText" Text="0" FontSize="29" FontWeight="Bold" Margin="0,6,0,0"/><TextBlock Text="в каталоге" Foreground="{DynamicResource AccentTextBrush}" FontSize="10.5" Margin="0,5,0,0"/></StackPanel>
+                                    <Border Grid.Column="1" Width="38" Height="38" CornerRadius="10" Background="{DynamicResource AccentSoftBrush}" VerticalAlignment="Top"><TextBlock Text="▦" Foreground="{DynamicResource AccentTextBrush}" FontSize="19" HorizontalAlignment="Center" VerticalAlignment="Center"/></Border>
+                                </Grid>
                             </Border>
-                            <Border Grid.Column="2" Background="{DynamicResource PanelBrush}" BorderBrush="{DynamicResource BorderBrush}" BorderThickness="1" CornerRadius="12" Padding="18">
-                                <StackPanel><TextBlock Text="Контакты" Foreground="{DynamicResource MutedBrush}"/><TextBlock x:Name="ContactsCountText" Text="0" FontSize="30" FontWeight="Bold" Margin="0,6,0,0"/></StackPanel>
+                            <Border Grid.Column="2" Style="{StaticResource CardStyle}" Padding="18">
+                                <Grid><Grid.ColumnDefinitions><ColumnDefinition Width="*"/><ColumnDefinition Width="42"/></Grid.ColumnDefinitions>
+                                    <StackPanel><TextBlock Text="Контакты" Foreground="{DynamicResource MutedBrush}" FontSize="11.5"/><TextBlock x:Name="ContactsCountText" Text="0" FontSize="29" FontWeight="Bold" Margin="0,6,0,0"/><TextBlock Text="сохранено" Foreground="{DynamicResource AccentTextBrush}" FontSize="10.5" Margin="0,5,0,0"/></StackPanel>
+                                    <Border Grid.Column="1" Width="38" Height="38" CornerRadius="10" Background="#EEF3FB" VerticalAlignment="Top"><TextBlock Text="●" Foreground="#4776B8" FontSize="16" HorizontalAlignment="Center" VerticalAlignment="Center"/></Border>
+                                </Grid>
                             </Border>
-                            <Border Grid.Column="4" Background="{DynamicResource PanelBrush}" BorderBrush="{DynamicResource BorderBrush}" BorderThickness="1" CornerRadius="12" Padding="18">
-                                <StackPanel><TextBlock Text="Заметки" Foreground="{DynamicResource MutedBrush}"/><TextBlock x:Name="NotesCountText" Text="0" FontSize="30" FontWeight="Bold" Margin="0,6,0,0"/></StackPanel>
+                            <Border Grid.Column="4" Style="{StaticResource CardStyle}" Padding="18">
+                                <Grid><Grid.ColumnDefinitions><ColumnDefinition Width="*"/><ColumnDefinition Width="42"/></Grid.ColumnDefinitions>
+                                    <StackPanel><TextBlock Text="Заметки" Foreground="{DynamicResource MutedBrush}" FontSize="11.5"/><TextBlock x:Name="NotesCountText" Text="0" FontSize="29" FontWeight="Bold" Margin="0,6,0,0"/><TextBlock Text="активных" Foreground="{DynamicResource AccentTextBrush}" FontSize="10.5" Margin="0,5,0,0"/></StackPanel>
+                                    <Border Grid.Column="1" Width="38" Height="38" CornerRadius="10" Background="#FFF5DF" VerticalAlignment="Top"><TextBlock Text="✎" Foreground="#A8771F" FontSize="17" HorizontalAlignment="Center" VerticalAlignment="Center"/></Border>
+                                </Grid>
                             </Border>
-                            <Border Grid.Column="6" Background="{DynamicResource PanelBrush}" BorderBrush="{DynamicResource BorderBrush}" BorderThickness="1" CornerRadius="12" Padding="18">
-                                <StackPanel><TextBlock Text="Закладки" Foreground="{DynamicResource MutedBrush}"/><TextBlock x:Name="BookmarksCountText" Text="0" FontSize="30" FontWeight="Bold" Margin="0,6,0,0"/></StackPanel>
+                            <Border Grid.Column="6" Style="{StaticResource CardStyle}" Padding="18">
+                                <Grid><Grid.ColumnDefinitions><ColumnDefinition Width="*"/><ColumnDefinition Width="42"/></Grid.ColumnDefinitions>
+                                    <StackPanel><TextBlock Text="Закладки" Foreground="{DynamicResource MutedBrush}" FontSize="11.5"/><TextBlock x:Name="BookmarksCountText" Text="0" FontSize="29" FontWeight="Bold" Margin="0,6,0,0"/><TextBlock Text="быстрый доступ" Foreground="{DynamicResource AccentTextBrush}" FontSize="10.5" Margin="0,5,0,0"/></StackPanel>
+                                    <Border Grid.Column="1" Width="38" Height="38" CornerRadius="10" Background="#F4EEFB" VerticalAlignment="Top"><TextBlock Text="★" Foreground="#8B64B4" FontSize="18" HorizontalAlignment="Center" VerticalAlignment="Center"/></Border>
+                                </Grid>
                             </Border>
                         </Grid>
 
-                        <Grid>
-                            <Grid.ColumnDefinitions><ColumnDefinition Width="1.4*"/><ColumnDefinition Width="16"/><ColumnDefinition Width="*"/></Grid.ColumnDefinitions>
-                            <Border Grid.Column="0" Background="{DynamicResource PanelBrush}" BorderBrush="{DynamicResource BorderBrush}" BorderThickness="1" CornerRadius="12" Padding="20">
-                                <StackPanel>
-                                    <TextBlock Text="Последние записи" FontSize="18" FontWeight="SemiBold"/>
-                                    <ListView x:Name="LatestList" Margin="0,12,0,0" BorderThickness="0" Background="Transparent" Foreground="{DynamicResource TextBrush}" Height="270">
-                                        <ListView.View><GridView><GridViewColumn Header="Тип" Width="110" DisplayMemberBinding="{Binding Kind}"/><GridViewColumn Header="Название" Width="260" DisplayMemberBinding="{Binding Title}"/><GridViewColumn Header="Категория" Width="160" DisplayMemberBinding="{Binding Category}"/></GridView></ListView.View>
+                        <Grid Margin="0,0,0,18">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="1.55*"/>
+                                <ColumnDefinition Width="16"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Border Grid.Column="0" Style="{StaticResource CardStyle}" Padding="20">
+                                <Grid>
+                                    <Grid.RowDefinitions><RowDefinition Height="Auto"/><RowDefinition Height="*"/></Grid.RowDefinitions>
+                                    <Grid>
+                                        <Grid.ColumnDefinitions><ColumnDefinition Width="*"/><ColumnDefinition Width="Auto"/></Grid.ColumnDefinitions>
+                                        <StackPanel><TextBlock Text="Последние записи" FontSize="17" FontWeight="SemiBold"/><TextBlock Text="Недавно добавленные данные" Foreground="{DynamicResource MutedBrush}" FontSize="10.5" Margin="0,3,0,0"/></StackPanel>
+                                        <Button Grid.Column="1" Style="{StaticResource OutlineButtonStyle}" Tag="Каталог" Click="NavButton_Click">Открыть каталог</Button>
+                                    </Grid>
+                                    <ListView x:Name="LatestList" Grid.Row="1" Margin="0,14,0,0" BorderThickness="0" Background="Transparent" Foreground="{DynamicResource TextBrush}" Height="270">
+                                        <ListView.View>
+                                            <GridView>
+                                                <GridViewColumn Header="Тип" Width="105" DisplayMemberBinding="{Binding Kind}"/>
+                                                <GridViewColumn Header="Название" Width="260" DisplayMemberBinding="{Binding Title}"/>
+                                                <GridViewColumn Header="Категория" Width="155" DisplayMemberBinding="{Binding Category}"/>
+                                            </GridView>
+                                        </ListView.View>
                                     </ListView>
-                                </StackPanel>
+                                </Grid>
                             </Border>
-                            <Border Grid.Column="2" Background="{DynamicResource PanelBrush}" BorderBrush="{DynamicResource BorderBrush}" BorderThickness="1" CornerRadius="12" Padding="20">
-                                <StackPanel>
-                                    <TextBlock Text="Быстрые действия" FontSize="18" FontWeight="SemiBold"/>
-                                    <Button Style="{StaticResource AccentButtonStyle}" Margin="0,14,0,8" Tag="Контакт|Новый контакт|Контакты" Click="QuickAdd_Click">+ Добавить контакт</Button>
-                                    <Button Style="{StaticResource AccentButtonStyle}" Margin="0,0,0,8" Tag="Заметка|Новая заметка|Заметки" Click="QuickAdd_Click">+ Добавить заметку</Button>
-                                    <Button Style="{StaticResource AccentButtonStyle}" Margin="0,0,0,8" Tag="Закладка|Новая закладка|Ссылки" Click="QuickAdd_Click">+ Добавить закладку</Button>
-                                    <TextBlock Text="База данных:" Margin="0,16,0,0" Foreground="{DynamicResource MutedBrush}"/>
-                                    <TextBlock Text="%LOCALAPPDATA%\SUNDUK\Data\sunduk.db" Margin="0,4,0,0" TextWrapping="Wrap" FontSize="12"/>
-                                </StackPanel>
-                            </Border>
+
+                            <StackPanel Grid.Column="2">
+                                <Border Style="{StaticResource CardStyle}" Padding="20" Margin="0,0,0,14">
+                                    <StackPanel>
+                                        <TextBlock Text="Быстрые действия" FontSize="17" FontWeight="SemiBold"/>
+                                        <TextBlock Text="Создайте новую запись в один клик" Foreground="{DynamicResource MutedBrush}" FontSize="10.5" Margin="0,3,0,11"/>
+                                        <Button Style="{StaticResource AccentButtonStyle}" Margin="0,3,0,8" Tag="Контакт|Новый контакт|Контакты" Click="QuickAdd_Click">＋  Добавить контакт</Button>
+                                        <Button Style="{StaticResource OutlineButtonStyle}" Margin="0,0,0,8" Tag="Заметка|Новая заметка|Заметки" Click="QuickAdd_Click">＋  Добавить заметку</Button>
+                                        <Button Style="{StaticResource OutlineButtonStyle}" Tag="Закладка|Новая закладка|Ссылки" Click="QuickAdd_Click">＋  Добавить закладку</Button>
+                                    </StackPanel>
+                                </Border>
+                                <Border Style="{StaticResource CardStyle}" Padding="18">
+                                    <Grid>
+                                        <Grid.ColumnDefinitions><ColumnDefinition Width="*"/><ColumnDefinition Width="Auto"/></Grid.ColumnDefinitions>
+                                        <StackPanel><TextBlock Text="Сегодня" FontSize="14" FontWeight="SemiBold"/><TextBlock Text="Нет просроченных задач" Foreground="{DynamicResource MutedBrush}" FontSize="10.5" Margin="0,4,0,0"/></StackPanel>
+                                        <Border Grid.Column="1" Background="{DynamicResource AccentSoftBrush}" CornerRadius="14" Padding="10,5" VerticalAlignment="Center"><TextBlock Text="Всё в порядке" Foreground="{DynamicResource AccentTextBrush}" FontSize="10.5" FontWeight="SemiBold"/></Border>
+                                    </Grid>
+                                </Border>
+                            </StackPanel>
                         </Grid>
                     </StackPanel>
                 </ScrollViewer>
 
+                <!-- Catalog with filters and table -->
                 <Grid x:Name="CatalogView" Visibility="Collapsed">
-                    <Grid.RowDefinitions><RowDefinition Height="Auto"/><RowDefinition Height="14"/><RowDefinition Height="*"/></Grid.RowDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="18"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+
                     <Grid>
                         <Grid.ColumnDefinitions><ColumnDefinition Width="*"/><ColumnDefinition Width="Auto"/></Grid.ColumnDefinitions>
-                        <TextBox x:Name="SearchBox" Height="38" Padding="12,8" Background="{DynamicResource PanelBrush}" Foreground="{DynamicResource TextBrush}" BorderBrush="{DynamicResource BorderBrush}" BorderThickness="1" TextChanged="SearchBox_TextChanged"/>
-                        <Button Grid.Column="1" Style="{StaticResource AccentButtonStyle}" Margin="12,0,0,0" Click="AddCard_Click">+ Новая карточка</Button>
+                        <StackPanel>
+                            <TextBlock Text="Каталог" FontSize="27" FontWeight="Bold"/>
+                            <TextBlock Text="Карточки, категории, фильтры и быстрый поиск" Foreground="{DynamicResource MutedBrush}" FontSize="12.5" Margin="0,5,0,0"/>
+                        </StackPanel>
+                        <Button Grid.Column="1" Style="{StaticResource AccentButtonStyle}" MinWidth="140" VerticalAlignment="Center" Click="AddCard_Click">＋  Новая карточка</Button>
                     </Grid>
-                    <Border Grid.Row="2" Background="{DynamicResource PanelBrush}" BorderBrush="{DynamicResource BorderBrush}" BorderThickness="1" CornerRadius="12" Padding="12">
-                        <ListView x:Name="CatalogList" Background="Transparent" Foreground="{DynamicResource TextBrush}" BorderThickness="0">
-                            <ListView.View><GridView><GridViewColumn Header="ID" Width="70" DisplayMemberBinding="{Binding Id}"/><GridViewColumn Header="Тип" Width="120" DisplayMemberBinding="{Binding Kind}"/><GridViewColumn Header="Название" Width="300" DisplayMemberBinding="{Binding Title}"/><GridViewColumn Header="Категория" Width="180" DisplayMemberBinding="{Binding Category}"/><GridViewColumn Header="Описание" Width="360" DisplayMemberBinding="{Binding Note}"/></GridView></ListView.View>
-                        </ListView>
-                    </Border>
+
+                    <Grid Grid.Row="2">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="224"/>
+                            <ColumnDefinition Width="16"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Border Grid.Column="0" Style="{StaticResource CardStyle}" Padding="18">
+                            <StackPanel>
+                                <Grid Margin="0,0,0,12">
+                                    <Grid.ColumnDefinitions><ColumnDefinition Width="*"/><ColumnDefinition Width="Auto"/></Grid.ColumnDefinitions>
+                                    <TextBlock Text="Фильтры" FontSize="15" FontWeight="SemiBold"/>
+                                    <Button Grid.Column="1" Content="Сбросить" Background="Transparent" Foreground="{DynamicResource AccentTextBrush}" BorderThickness="0" FontSize="10.5" Cursor="Hand"/>
+                                </Grid>
+                                <TextBlock Text="КАТЕГОРИИ" Foreground="{DynamicResource MutedBrush}" FontSize="9.5" FontWeight="SemiBold" Margin="0,4,0,7"/>
+                                <CheckBox Content="Все записи" IsChecked="True" Margin="0,5" FontSize="12.5"/>
+                                <CheckBox Content="Товары" Margin="0,5" FontSize="12.5"/>
+                                <CheckBox Content="Контакты" Margin="0,5" FontSize="12.5"/>
+                                <CheckBox Content="Заметки" Margin="0,5" FontSize="12.5"/>
+                                <CheckBox Content="Закладки" Margin="0,5" FontSize="12.5"/>
+                                <Separator Margin="0,14,0,13" Background="{DynamicResource BorderBrush}"/>
+                                <TextBlock Text="СОСТОЯНИЕ" Foreground="{DynamicResource MutedBrush}" FontSize="9.5" FontWeight="SemiBold" Margin="0,0,0,7"/>
+                                <CheckBox Content="Активные" IsChecked="True" Margin="0,5" FontSize="12.5"/>
+                                <CheckBox Content="Избранное" Margin="0,5" FontSize="12.5"/>
+                                <CheckBox Content="Архив" Margin="0,5" FontSize="12.5"/>
+                                <Separator Margin="0,14,0,13" Background="{DynamicResource BorderBrush}"/>
+                                <TextBlock Text="БАЗА ДАННЫХ" Foreground="{DynamicResource MutedBrush}" FontSize="9.5" FontWeight="SemiBold"/>
+                                <TextBlock Text="Локальное хранение" FontSize="11.5" Margin="0,7,0,0"/>
+                                <TextBlock Text="SQLite • на этом ПК" Foreground="{DynamicResource AccentTextBrush}" FontSize="10.5" Margin="0,3,0,0"/>
+                            </StackPanel>
+                        </Border>
+
+                        <Border Grid.Column="2" Style="{StaticResource CardStyle}">
+                            <Grid>
+                                <Grid.RowDefinitions><RowDefinition Height="62"/><RowDefinition Height="*"/><RowDefinition Height="44"/></Grid.RowDefinitions>
+                                <Grid Margin="16,0">
+                                    <Grid.ColumnDefinitions><ColumnDefinition Width="*"/><ColumnDefinition Width="Auto"/></Grid.ColumnDefinitions>
+                                    <TextBox x:Name="SearchBox" Style="{StaticResource SearchBoxStyle}" Height="36" VerticalAlignment="Center" TextChanged="SearchBox_TextChanged" ToolTip="Поиск по карточкам"/>
+                                    <StackPanel Grid.Column="1" Orientation="Horizontal" Margin="12,0,0,0" VerticalAlignment="Center">
+                                        <Button Style="{StaticResource OutlineButtonStyle}" Margin="0,0,7,0">Сортировка ▾</Button>
+                                        <Button Style="{StaticResource OutlineButtonStyle}">Экспорт</Button>
+                                    </StackPanel>
+                                </Grid>
+                                <Border Grid.Row="1" BorderBrush="{DynamicResource BorderBrush}" BorderThickness="0,1,0,1" Padding="8,6">
+                                    <ListView x:Name="CatalogList" Background="Transparent" Foreground="{DynamicResource TextBrush}" BorderThickness="0">
+                                        <ListView.View>
+                                            <GridView>
+                                                <GridViewColumn Header="ID" Width="58" DisplayMemberBinding="{Binding Id}"/>
+                                                <GridViewColumn Header="Тип" Width="115" DisplayMemberBinding="{Binding Kind}"/>
+                                                <GridViewColumn Header="Название" Width="285" DisplayMemberBinding="{Binding Title}"/>
+                                                <GridViewColumn Header="Категория" Width="170" DisplayMemberBinding="{Binding Category}"/>
+                                                <GridViewColumn Header="Описание" Width="330" DisplayMemberBinding="{Binding Note}"/>
+                                            </GridView>
+                                        </ListView.View>
+                                    </ListView>
+                                </Border>
+                                <Grid Grid.Row="2" Margin="16,0">
+                                    <Grid.ColumnDefinitions><ColumnDefinition Width="*"/><ColumnDefinition Width="Auto"/></Grid.ColumnDefinitions>
+                                    <TextBlock Text="Локальный каталог SUNDUK" Foreground="{DynamicResource MutedBrush}" FontSize="10.5" VerticalAlignment="Center"/>
+                                    <StackPanel Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center"><TextBlock Text="Страница 1" Foreground="{DynamicResource MutedBrush}" FontSize="10.5" VerticalAlignment="Center"/><Button Style="{StaticResource OutlineButtonStyle}" MinHeight="28" Padding="9,3" Margin="10,0,0,0">›</Button></StackPanel>
+                                </Grid>
+                            </Grid>
+                        </Border>
+                    </Grid>
                 </Grid>
 
-                <Border x:Name="PlaceholderView" Visibility="Collapsed" Background="{DynamicResource PanelBrush}" BorderBrush="{DynamicResource BorderBrush}" BorderThickness="1" CornerRadius="14" Padding="28">
-                    <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
-                        <TextBlock x:Name="PlaceholderTitle" Text="Раздел" FontSize="30" FontWeight="Bold" HorizontalAlignment="Center"/>
-                        <TextBlock x:Name="PlaceholderText" Text="Раздел подготовлен в навигации и будет развиваться по дорожной карте SUNDUK." FontSize="14" Margin="0,12,0,0" Foreground="{DynamicResource MutedBrush}" TextAlignment="Center" TextWrapping="Wrap" MaxWidth="560"/>
-                    </StackPanel>
+                <!-- Other modules keep the approved shell while implementation continues -->
+                <Border x:Name="PlaceholderView" Visibility="Collapsed" Style="{StaticResource CardStyle}" Padding="34">
+                    <Grid>
+                        <Grid.RowDefinitions><RowDefinition Height="Auto"/><RowDefinition Height="*"/></Grid.RowDefinitions>
+                        <StackPanel>
+                            <TextBlock x:Name="PlaceholderTitle" Text="Раздел" FontSize="27" FontWeight="Bold"/>
+                            <TextBlock x:Name="PlaceholderText" Text="Раздел SUNDUK" FontSize="12.5" Margin="0,6,0,0" Foreground="{DynamicResource MutedBrush}" TextWrapping="Wrap" MaxWidth="700"/>
+                        </StackPanel>
+                        <Border Grid.Row="1" Background="{DynamicResource WorkspaceBrush}" CornerRadius="11" Margin="0,22,0,0" Padding="24">
+                            <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+                                <Border Width="52" Height="52" CornerRadius="14" Background="{DynamicResource AccentSoftBrush}"><TextBlock Text="◫" Foreground="{DynamicResource AccentTextBrush}" FontSize="24" HorizontalAlignment="Center" VerticalAlignment="Center"/></Border>
+                                <TextBlock Text="Модуль подключён к общей навигации" FontSize="16" FontWeight="SemiBold" Margin="0,14,0,0"/>
+                                <TextBlock Text="Функциональная часть будет развиваться без изменения утверждённой оболочки SUNDUK." Foreground="{DynamicResource MutedBrush}" FontSize="11.5" Margin="0,6,0,0" TextAlignment="Center"/>
+                            </StackPanel>
+                        </Border>
+                    </Grid>
                 </Border>
             </Grid>
 
-            <Border Grid.Row="2" Background="{DynamicResource PanelBrush}" BorderBrush="{DynamicResource BorderBrush}" BorderThickness="0,1,0,0">
-                <Grid Margin="24,0"><TextBlock x:Name="StatusText" Text="Готово" VerticalAlignment="Center" FontSize="11" Foreground="{DynamicResource MutedBrush}"/></Grid>
+            <Border Grid.Row="2" Background="{DynamicResource CardBrush}" BorderBrush="{DynamicResource BorderBrush}" BorderThickness="0,1,0,0">
+                <Grid Margin="28,0,26,0">
+                    <TextBlock x:Name="StatusText" Text="Готово" VerticalAlignment="Center" FontSize="10" Foreground="{DynamicResource MutedBrush}"/>
+                </Grid>
             </Border>
         </Grid>
     </Grid>
