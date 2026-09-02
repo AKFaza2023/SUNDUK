@@ -1,6 +1,7 @@
 using System.Diagnostics;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Navigation;
 using Microsoft.Win32;
@@ -48,7 +49,7 @@ public partial class MainWindow : Window
 
         if (page == "Главная")
         {
-            PageSubtitle.Text = "Рабочее пространство SUNDUK";
+            PageSubtitle.Text = "Ваше рабочее пространство и быстрый доступ к важному";
             DashboardView.Visibility = Visibility.Visible;
             RefreshAll();
             return;
@@ -56,7 +57,7 @@ public partial class MainWindow : Window
 
         if (page == "Каталог")
         {
-            PageSubtitle.Text = "Карточки, категории и быстрый поиск";
+            PageSubtitle.Text = "Карточки, категории, фильтры и быстрый поиск";
             CatalogView.Visibility = Visibility.Visible;
             RefreshCatalog();
             return;
@@ -67,16 +68,37 @@ public partial class MainWindow : Window
 
         PlaceholderText.Text = page switch
         {
-            "Объявления" => "Модуль объявлений подготовлен под Avito, ЦИАН и другие источники. Парсеры и WebView2 подключаются на следующем этапе.",
-            "Ежедневник" => "Ежедневник присутствует в структуре интерфейса и будет подключён к задачам и напоминаниям.",
-            "Напоминания" => "Напоминания запланированы как отдельный рабочий модуль с локальными уведомлениями.",
-            "Файлы" => "Раздел файлов подготовлен для локальных вложений карточек и дальнейшей синхронизации.",
-            "Настройки" => $"Активная тема: {_currentTheme}. Дополнительные параметры будут добавляться по мере развития проекта.",
-            "Поддержка" => "SUNDUK — разработка СтавДок. Сайт разработчика доступен по ссылке в нижней части боковой панели.",
-            _ => $"Раздел «{page}» уже включён в навигацию SUNDUK и будет развиваться по дорожной карте проекта."
+            "Объявления" => "Единое рабочее место для объявлений и внешних источников. Модуль подключён к утверждённой оболочке SUNDUK.",
+            "Закладки" => "Сохранённые ссылки и быстрый доступ к важным интернет-ресурсам.",
+            "Контакты" => "Контакты, организации и связанные записи в единой локальной базе.",
+            "Заметки" => "Личные и рабочие заметки с привязкой к другим данным SUNDUK.",
+            "Ежедневник" => "Ежедневник и календарное представление рабочих событий.",
+            "Задачи" => "Задачи, статусы и контроль выполнения в едином рабочем пространстве.",
+            "Напоминания" => "Локальные напоминания и уведомления SUNDUK.",
+            "Файлы" => "Локальные файлы и вложения карточек с дальнейшим развитием синхронизации.",
+            "Избранное" => "Избранные карточки, записи и быстрые ссылки.",
+            "Настройки" => $"Активная тема: {_currentTheme}. Настройки применяются без перезапуска приложения.",
+            "Поддержка" => "SUNDUK — разработка СтавДок. Сайт разработчика доступен по ссылке «ставдок.рф» в нижней части боковой панели.",
+            _ => $"Раздел «{page}» подключён к общей навигации SUNDUK."
         };
 
         PlaceholderView.Visibility = Visibility.Visible;
+    }
+
+    private void TopSearchBox_KeyDown(object sender, KeyEventArgs e)
+    {
+        if (e.Key != Key.Enter)
+        {
+            return;
+        }
+
+        ShowPage("Каталог");
+        SearchBox.Text = TopSearchBox.Text;
+        RefreshCatalog();
+        StatusText.Text = string.IsNullOrWhiteSpace(TopSearchBox.Text)
+            ? "Открыт каталог"
+            : $"Поиск: {TopSearchBox.Text.Trim()}";
+        e.Handled = true;
     }
 
     private void AddCard_Click(object sender, RoutedEventArgs e)
@@ -169,30 +191,45 @@ public partial class MainWindow : Window
 
         if (effectiveTheme == "Light")
         {
-            SetBrush("BgBrush", "#F4F7FA");
-            SetBrush("PanelBrush", "#FFFFFF");
-            SetBrush("PanelAltBrush", "#EEF2F6");
-            SetBrush("TextBrush", "#16202A");
-            SetBrush("MutedBrush", "#647383");
-            SetBrush("BorderBrush", "#DCE3EA");
-            SetBrush("AccentBrush", "#20945B");
-            SetBrush("AccentHoverBrush", "#27A968");
+            SetBrush("ShellBrush", "#F3F6F8");
+            SetBrush("ShellDeepBrush", "#E8EEF2");
+            SetBrush("ShellHoverBrush", "#E1E9EE");
+            SetBrush("ShellTextBrush", "#173042");
+            SetBrush("ShellMutedBrush", "#6D7D89");
+            SetBrush("WorkspaceBrush", "#F7F9FB");
+            SetBrush("CardBrush", "#FFFFFF");
+            SetBrush("InputBrush", "#F8FAFC");
+            SetBrush("TextBrush", "#17212B");
+            SetBrush("MutedBrush", "#697887");
+            SetBrush("BorderBrush", "#E1E7ED");
+            SetBrush("AccentBrush", "#1FA35B");
+            SetBrush("AccentHoverBrush", "#188A4D");
+            SetBrush("AccentSoftBrush", "#EAF7F0");
+            SetBrush("AccentTextBrush", "#167A45");
         }
         else
         {
-            SetBrush("BgBrush", "#0E131A");
-            SetBrush("PanelBrush", "#151C25");
-            SetBrush("PanelAltBrush", "#1C2530");
-            SetBrush("TextBrush", "#F7FAFC");
-            SetBrush("MutedBrush", "#9AA8B8");
-            SetBrush("BorderBrush", "#2B3745");
-            SetBrush("AccentBrush", "#24A866");
-            SetBrush("AccentHoverBrush", "#2DBE76");
+            // Approved default: dark-blue shell, white/light workspace and green accents.
+            SetBrush("ShellBrush", "#11283A");
+            SetBrush("ShellDeepBrush", "#0D2030");
+            SetBrush("ShellHoverBrush", "#1A354A");
+            SetBrush("ShellTextBrush", "#F7FBFF");
+            SetBrush("ShellMutedBrush", "#A8B9C6");
+            SetBrush("WorkspaceBrush", "#F5F7FA");
+            SetBrush("CardBrush", "#FFFFFF");
+            SetBrush("InputBrush", "#F8FAFC");
+            SetBrush("TextBrush", "#17212B");
+            SetBrush("MutedBrush", "#697887");
+            SetBrush("BorderBrush", "#E1E7ED");
+            SetBrush("AccentBrush", "#1FA35B");
+            SetBrush("AccentHoverBrush", "#188A4D");
+            SetBrush("AccentSoftBrush", "#EAF7F0");
+            SetBrush("AccentTextBrush", "#167A45");
         }
 
         StatusText.Text = theme switch
         {
-            "Dark" => "Тема: Тёмная",
+            "Dark" => "Тема: Тёмная — утверждённая оболочка SUNDUK",
             "Light" => "Тема: Светлая",
             _ => $"Тема: Как в системе ({effectiveTheme})"
         };
