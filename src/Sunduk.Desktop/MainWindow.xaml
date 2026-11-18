@@ -221,7 +221,7 @@
             <Grid.ColumnDefinitions><ColumnDefinition Width="224"/><ColumnDefinition Width="*"/></Grid.ColumnDefinitions>
             <TextBlock x:Name="StatusText" Grid.Column="0" Text="Готово" Foreground="Transparent"/>
             <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,18,0">
-                <TextBlock Text="Версия 0.3.0" Foreground="#C5D0DD" FontSize="10.5"/>
+                <TextBlock Text="Версия 0.4.0-dev.1" Foreground="#C5D0DD" FontSize="10.5"/>
                 <TextBlock Text="  |  Разработка СтавДок  |  " Foreground="#C5D0DD" FontSize="10.5"/>
                 <TextBlock FontSize="10.5"><Hyperlink Foreground="#3DA7FF" NavigateUri="https://xn--80aegytoh.xn--p1ai" RequestNavigate="DeveloperSite_RequestNavigate">ставдок.рф ↗</Hyperlink></TextBlock>
             </StackPanel>
