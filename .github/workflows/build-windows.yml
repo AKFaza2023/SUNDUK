@@ -13,8 +13,28 @@ permissions:
   contents: read
 
 jobs:
+  storage-checks:
+    name: Storage / ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 10
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup .NET 8 SDK
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '8.0.x'
+      - name: Build storage checks
+        run: dotnet build tests/Sunduk.StorageChecks/Sunduk.StorageChecks.csproj -c Release -m:1 -p:TreatWarningsAsErrors=true
+      - name: Run storage checks
+        run: dotnet tests/Sunduk.StorageChecks/bin/Release/net8.0/Sunduk.StorageChecks.dll
+
   build:
     name: WPF / Windows x64
+    needs: storage-checks
     runs-on: windows-latest
     timeout-minutes: 20
 
@@ -45,6 +65,14 @@ jobs:
             -p:DebugSymbols=false `
             -o .\publish\win-x64
 
+      - name: Verify WPF startup and legacy migration
+        shell: pwsh
+        run: |
+          dotnet build tests/Sunduk.StorageChecks/Sunduk.StorageChecks.csproj -c Release -m:1 -p:TreatWarningsAsErrors=true
+          if ($LASTEXITCODE -ne 0) { throw 'Storage check harness build failed.' }
+          dotnet tests/Sunduk.StorageChecks/bin/Release/net8.0/Sunduk.StorageChecks.dll --desktop-smoke publish/win-x64/SUNDUK.exe
+          if ($LASTEXITCODE -ne 0) { throw 'WPF startup smoke failed.' }
+
       - name: Verify SUNDUK.exe
         shell: pwsh
         run: |
@@ -59,15 +87,15 @@ jobs:
 
       - name: Package ZIP
         shell: pwsh
-        run: Compress-Archive -Path .\publish\win-x64\* -DestinationPath .\SUNDUK_0.3_win-x64.zip -Force
+        run: Compress-Archive -Path .\publish\win-x64\* -DestinationPath .\SUNDUK_candidate_win-x64.zip -Force
 
       - name: Upload Windows artifact
         uses: actions/upload-artifact@v4
         with:
-          name: SUNDUK-0.3-win-x64
+          name: SUNDUK-candidate-win-x64
           path: |
             publish/win-x64/SUNDUK.exe
             publish/win-x64/SHA256.txt
-            SUNDUK_0.3_win-x64.zip
+            SUNDUK_candidate_win-x64.zip
           if-no-files-found: error
           retention-days: 30

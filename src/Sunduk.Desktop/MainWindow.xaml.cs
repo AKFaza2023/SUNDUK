@@ -12,6 +12,7 @@ namespace Sunduk.Desktop;
 public partial class MainWindow : Window
 {
     private string _currentTheme = "Dark";
+    private bool _databaseReady;
 
     public MainWindow()
     {
@@ -20,11 +21,16 @@ public partial class MainWindow : Window
         try
         {
             DatabaseService.Initialize();
+            _databaseReady = true;
             StatusText.Text = "Локальная база данных подключена";
         }
         catch (Exception ex)
         {
-            StatusText.Text = $"Ошибка базы данных: {ex.Message}";
+            MessageBox.Show($"Не удалось открыть локальную базу SUNDUK.\n\n{ex.Message}\n\n" +
+                "Программа закроется. Не удаляйте sunduk.db и папку Backups.",
+                "SUNDUK — база недоступна", MessageBoxButton.OK, MessageBoxImage.Error);
+            Loaded += (_, _) => Close();
+            return;
         }
 
         ApplyTheme("Dark");
@@ -170,25 +176,31 @@ public partial class MainWindow : Window
 
     private void RefreshAll()
     {
+        if (!_databaseReady) return;
         try
         {
             ProductsCountText.Text = DatabaseService.CountByKind("Товар").ToString();
             ContactsCountText.Text = DatabaseService.CountByKind("Контакт").ToString();
             LatestList.ItemsSource = DatabaseService.GetItems(limit: 5);
         }
-        catch
+        catch (Exception ex)
         {
+            MessageBox.Show($"Не удалось прочитать данные.\n\n{ex.Message}", "SUNDUK",
+                MessageBoxButton.OK, MessageBoxImage.Error);
         }
     }
 
     private void RefreshCatalog()
     {
+        if (!_databaseReady) return;
         try
         {
             CatalogList.ItemsSource = DatabaseService.GetItems(SearchBox?.Text);
         }
-        catch
+        catch (Exception ex)
         {
+            MessageBox.Show($"Не удалось прочитать каталог.\n\n{ex.Message}", "SUNDUK",
+                MessageBoxButton.OK, MessageBoxImage.Error);
         }
     }
 

@@ -1,8 +1,18 @@
-Microsoft Visual Studio Solution File, Format Version 12.00
+﻿Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{60DC8134-EBA5-43B8-BCC9-BB4BC16C2548}") = "Sunduk.Desktop", "src\Sunduk.Desktop\Sunduk.Desktop.csproj", "{A1F2E3D4-C5B6-4789-90AB-CDEF12345678}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{DEE5AC4E-F025-4FB4-B74A-B8B4070D0045}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sunduk.Core", "src\Sunduk.Core\Sunduk.Core.csproj", "{D8558B6C-5818-48EB-992F-CF46D93DC08E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sunduk.Infrastructure", "src\Sunduk.Infrastructure\Sunduk.Infrastructure.csproj", "{B504C473-CF8E-4F4C-9A27-15995CEE5684}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{4038A079-9AD0-4498-A351-1CBB4FC39343}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sunduk.StorageChecks", "tests\Sunduk.StorageChecks\Sunduk.StorageChecks.csproj", "{53AEBD29-B53B-4012-8957-B215F255DF06}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -14,5 +24,22 @@ Global
 		{A1F2E3D4-C5B6-4789-90AB-CDEF12345678}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A1F2E3D4-C5B6-4789-90AB-CDEF12345678}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A1F2E3D4-C5B6-4789-90AB-CDEF12345678}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D8558B6C-5818-48EB-992F-CF46D93DC08E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D8558B6C-5818-48EB-992F-CF46D93DC08E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D8558B6C-5818-48EB-992F-CF46D93DC08E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D8558B6C-5818-48EB-992F-CF46D93DC08E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B504C473-CF8E-4F4C-9A27-15995CEE5684}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B504C473-CF8E-4F4C-9A27-15995CEE5684}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B504C473-CF8E-4F4C-9A27-15995CEE5684}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B504C473-CF8E-4F4C-9A27-15995CEE5684}.Release|Any CPU.Build.0 = Release|Any CPU
+		{53AEBD29-B53B-4012-8957-B215F255DF06}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{53AEBD29-B53B-4012-8957-B215F255DF06}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{53AEBD29-B53B-4012-8957-B215F255DF06}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{53AEBD29-B53B-4012-8957-B215F255DF06}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{D8558B6C-5818-48EB-992F-CF46D93DC08E} = {DEE5AC4E-F025-4FB4-B74A-B8B4070D0045}
+		{B504C473-CF8E-4F4C-9A27-15995CEE5684} = {DEE5AC4E-F025-4FB4-B74A-B8B4070D0045}
+		{53AEBD29-B53B-4012-8957-B215F255DF06} = {4038A079-9AD0-4498-A351-1CBB4FC39343}
 	EndGlobalSection
 EndGlobal
